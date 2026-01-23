@@ -1,0 +1,30 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: apps-from-repo
+  namespace: argocd
+spec:
+  generators:
+    - git:
+        repoURL: https://github.com/KubeCraftsMan/k8s-multitier-kind.git
+        revision: HEAD
+        directories:
+          - path: 'k8s/frontend'
+          - path: 'k8s/backend'
+          - path: 'k8s/mysql'
+  template:
+    metadata:
+      name: '{{path.basename}}'   # nome da Application (use nomes válidos em minúsculo)
+    spec:
+      project: default
+      source:
+        repoURL: https://github.com/KubeCraftsMan/k8s-multitier-kind.git
+        targetRevision: HEAD
+        path: '{{path}}'
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: '{{path.basename}}'  # cada app em seu namespace
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
