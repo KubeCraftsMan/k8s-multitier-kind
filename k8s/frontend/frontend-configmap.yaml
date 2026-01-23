@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: frontend-html
+data:
+  index.html: |
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <title>Frontend Kubernetes</title>
+      </head>
+      <body>
+        <h1>🚀 Frontend rodando no Kubernetes!</h1>
+        <p>Aplicação multi-tier com kind</p>
+        <p>Backend Service: backend</p>
+      </body>
+    </html>
