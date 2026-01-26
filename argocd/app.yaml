@@ -9,9 +9,7 @@ spec:
         repoURL: https://github.com/KubeCraftsMan/k8s-multitier-kind.git
         revision: HEAD
         directories:
-          - path: 'k8s/frontend'
-          - path: 'k8s/backend'
-          - path: 'k8s/mysql'
+          - path: 'k8s/*'
   template:
     metadata:
       name: '{{path.basename}}'   # nome da Application (use nomes válidos em minúsculo)
@@ -23,7 +21,7 @@ spec:
         path: '{{path}}'
       destination:
         server: https://kubernetes.default.svc
-        namespace: '{{path.basename}}'  # cada app em seu namespace
+        namespace: 'default'  # cada app em seu namespace
       syncPolicy:
         automated:
           prune: true
