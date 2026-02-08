@@ -9,7 +9,7 @@ spec:
         repoURL: https://github.com/KubeCraftsMan/k8s-multitier-kind.git
         revision: HEAD
         directories:
-          - path: 'k8s/*'
+          - path: 'k8s/backend/*'  # caminho para os manifests das aplicações
   template:
     metadata:
       name: '{{path.basename}}'   # nome da Application (use nomes válidos em minúsculo)

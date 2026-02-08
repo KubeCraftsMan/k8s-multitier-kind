@@ -1,26 +1,26 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: backend
+  name: nginx
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: backend
+      app: nginx
   template:
     metadata:
       labels:
-        app: backend
+        app: nginx
     spec:
       containers:
-        - name: backend
-          image: hashicorp/http-echo
-          args:
-            - "-text=Backend conectado ao MySQL"
-          envFrom:
-            - configMapRef:
-                name: app-config
-            - secretRef:
-                name: db-secret
-          ports:
-            - containerPort: 5678
+      - name: nginx
+        image: nginx:1.21
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            cpu: 100m
+            memory: 128Mi
+          limits:
+            cpu: 200m
+            memory: 256Mi
